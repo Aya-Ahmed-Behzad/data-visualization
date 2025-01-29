@@ -3,14 +3,10 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
-"""
-freeCodeCamp Project - Data Analysis with Python
-
-"""
 # 1- Importing data
 df = pd.read_csv('medical_examination.csv')
 
-# 2- Adding 'overweight' column: Using vectorized operations for efficiency
+# 2- Adding the 'overweight' column
 df['overweight'] = (df['weight'] / (df['height'] / 100) ** 2) > 25
 df['overweight'] = df['overweight'].astype(int)
 
@@ -59,13 +55,13 @@ def draw_heat_map():
                  (df['height'] >= df['height'].quantile(0.025)) &
                  (df['weight'] <= df['weight'].quantile(0.975))]
 
-    # Calculate the correlation matrix
+    # Calculating the correlation matrix
     corr = df_heat.corr()
 
-    # Mask the upper triangle of the correlation matrix
+    # Masking the upper triangle of the correlation matrix
     mask = np.triu(np.ones_like(corr, dtype=bool))
 
-    # Create the heatmap plot
+    # Creating the heatmap plot
     fig, ax = plt.subplots(figsize=(12, 12))
     
     sns.heatmap(corr,
